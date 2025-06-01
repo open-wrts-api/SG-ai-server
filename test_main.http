@@ -22,3 +22,11 @@ Accept: application/json
 
 GET http://127.0.0.1:8000/cleanup/
 accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/reportBan/testuser@example.com
+
+###
+
+GET http://127.0.0.1:8000/gemini_key

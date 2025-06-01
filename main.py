@@ -1,3 +1,5 @@
+from email.policy import default
+
 from fastapi import FastAPI
 from SQLite import sqlite_commands as SQLite
 import time
@@ -133,5 +135,17 @@ async def report_ban(email: str):
     try:
         db.edit_item("users", "banned", True, "email", email)
         return {"staat": "OK"}
+    except Exception as error:
+        return {"error": str(error), "staat": "ERROR"}
+
+@app.get("/gemini_key")
+async def gemini_key():
+    """
+    Endpoint to return the Gemini key.
+    :return:
+    """
+    await cleanup()
+    try:
+        return db.get_all_items_sorted("gemini_key", "key")[0]
     except Exception as error:
         return {"error": str(error), "staat": "ERROR"}
